@@ -12,7 +12,7 @@ function BalanceBox(props: Props) {
   return (
     <div className="w-full flex flex-col items-center justify-center dark:text-white p-4">
       <div className="text-2xl slashed-zero">
-        {!balanceLoading && balancesDecorated.accountBalance ? (
+        {!balanceLoading ? (
           <>
             <span className="font-medium">{balanceParts[0]}</span>
             <span>&nbsp;{balanceParts[1]}</span>

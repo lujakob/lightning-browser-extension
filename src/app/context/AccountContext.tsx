@@ -105,20 +105,20 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
     const id = options?.accountId || account?.id;
     if (!id) return;
 
-    const callback = (accountRes: AccountInfo) => {
-      setAccount(accountRes);
-      updateAccountBalance(accountRes.balance, accountRes.currency);
-      setBalanceLoading(false);
-    };
-
     let accountInfo;
     try {
-      accountInfo = await api.swr.getAccountInfo(id, callback);
+      accountInfo = await api.swr.getAccountInfo(id);
+
+      setAccount(accountInfo);
+      updateAccountBalance(accountInfo?.balance || 0, accountInfo?.currency);
     } catch (e) {
+      toast.error(`Fetching account failed. It might be offline.`);
+      console.error("Fetching account failed. It might be offline.");
+
       return;
-      // console.log("api.swr.getAccountInfo catch", e);
+      // console.log("Lukas: api.swr.getAccountInfo catch", e);
     } finally {
-      // console.log("api.swr.getAccountInfo finally")
+      // console.log("Lukas: api.swr.getAccountInfo finally")
       setBalanceLoading(false);
     }
 

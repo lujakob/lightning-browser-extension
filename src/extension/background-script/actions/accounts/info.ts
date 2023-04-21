@@ -17,6 +17,10 @@ const info = async (message: MessageAccountInfo) => {
       return { error: "No current account set" };
     }
 
+    if (currentAccount.name === "LND") {
+      throw new Error("simulate LND fail");
+    }
+
     const result: AccountInfoRes = {
       currentAccountId: currentAccountId,
       name: currentAccount.name,

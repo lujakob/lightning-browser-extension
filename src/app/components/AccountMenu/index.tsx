@@ -39,11 +39,8 @@ function AccountMenu({ showOptions = true }: Props) {
   const { accounts, getAccounts } = useAccounts();
   const [loading, setLoading] = useState(false);
 
-  // update title
-  const title =
-    !!authAccount?.name &&
-    typeof authAccount?.name === "string" &&
-    `${authAccount?.name}`;
+  // get title from accounts list, because fetching account info might fail
+  const title = authAccount?.id ? accounts[authAccount.id]?.name : "";
 
   useEffect(() => {
     getAccounts();
