@@ -66,6 +66,7 @@ export const swrGetAccountInfo = async (
   const accountsCache = await getAccountsCache();
 
   return new Promise((resolve, reject) => {
+    // @Todo: remove this debug outcomment
     // if (accountsCache[id]) {
     //   if (callback) callback(accountsCache[id]);
     //   resolve(accountsCache[id]);
@@ -73,7 +74,7 @@ export const swrGetAccountInfo = async (
 
     // Update account info with most recent data, save to cache.
     getAccountInfo()
-      .then((response) => {
+      .then((response: AccountInfoRes) => {
         const { alias } = response.info;
         const { balance: resBalance, currency } = response.balance;
         const name = response.name;
