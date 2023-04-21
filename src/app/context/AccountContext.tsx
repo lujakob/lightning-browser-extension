@@ -111,8 +111,16 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
       setBalanceLoading(false);
     };
 
-    const accountInfo = await api.swr.getAccountInfo(id, callback);
-    setBalanceLoading(false);
+    let accountInfo;
+    try {
+      accountInfo = await api.swr.getAccountInfo(id, callback);
+    } catch (e) {
+      return;
+      // console.log("api.swr.getAccountInfo catch", e);
+    } finally {
+      // console.log("api.swr.getAccountInfo finally")
+      setBalanceLoading(false);
+    }
 
     return { ...accountInfo, fiatBalance, accountBalance };
   };

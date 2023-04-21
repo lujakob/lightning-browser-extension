@@ -128,7 +128,7 @@ const DefaultView: FC<Props> = (props) => {
       return;
     }
 
-    const invoices: Transaction[] = result.invoices.map((invoice) => ({
+    const invoices: Transaction[] = (result?.invoices || []).map((invoice) => ({
       ...invoice,
       title: invoice.memo,
       description: invoice.memo,

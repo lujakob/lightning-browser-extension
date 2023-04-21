@@ -66,10 +66,10 @@ export const swrGetAccountInfo = async (
   const accountsCache = await getAccountsCache();
 
   return new Promise((resolve, reject) => {
-    if (accountsCache[id]) {
-      if (callback) callback(accountsCache[id]);
-      resolve(accountsCache[id]);
-    }
+    // if (accountsCache[id]) {
+    //   if (callback) callback(accountsCache[id]);
+    //   resolve(accountsCache[id]);
+    // }
 
     // Update account info with most recent data, save to cache.
     getAccountInfo()
@@ -93,7 +93,9 @@ export const swrGetAccountInfo = async (
         if (callback) callback(account);
         return resolve(account);
       })
-      .catch(reject);
+      .catch((e) => {
+        reject(e);
+      });
   });
 };
 export const getAccounts = () => msg.request<Accounts>("getAccounts");
